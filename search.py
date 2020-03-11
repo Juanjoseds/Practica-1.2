@@ -55,6 +55,7 @@ class Problem:
         abstract
 
 
+
 # ______________________________________________________________________________
 
 class Node:
@@ -100,10 +101,13 @@ def graph_search(problem, fringe):
     The argument fringe should be an empty queue.
     If two paths reach a state, only use the best one. [Fig. 3.18]"""
     closed = {}
+    contador = 0
     fringe.append(Node(problem.initial))
     while fringe:
         node = fringe.pop()
+        contador += 1
         if problem.goal_test(node.state):
+            print("Nodos visitados: ", contador)
             return node
         if node.state not in closed:
             closed[node.state] = True
@@ -124,7 +128,12 @@ def ramificacion_first_graph_search(problem):
     """Search the deepest nodes in the search tree first. [p 74]"""
     return graph_search(problem, AcotarQueue())
 
+def subestimacion_first_graph_search(problem):
+    """Search the deepest nodes in the search tree first. [p 74]"""
+    return graph_search(problem, SubestimacionQueue(problem))
+
 """CREAR UNA NUEVA BUSQUEDA"""
+
 
 # _____________________________________________________________________________
 # The remainder of this file implements examples for the search algorithms.
